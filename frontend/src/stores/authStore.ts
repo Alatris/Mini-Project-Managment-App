@@ -24,6 +24,7 @@ export const useAuthStore = create<AuthState>((set, get) => {
                 try {
                     const userProfile = await authApi.getProfile();
                     set({user: userProfile, isAuthenticated: true, accessToken: token, loading: false});
+                    // eslint-disable-next-line @typescript-eslint/no-unused-vars
                 } catch (err: unknown) {
                     get().logout();
                 }

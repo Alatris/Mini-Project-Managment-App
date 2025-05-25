@@ -1,5 +1,5 @@
 import axios, {AxiosError, AxiosResponse} from 'axios';
-import {toastService} from '@/components/ui/toast';
+import {toastService} from '@/components/ui/toast/toast.tsx';
 
 const apiClient = axios.create({
     baseURL: import.meta.env.VITE_API_URL,

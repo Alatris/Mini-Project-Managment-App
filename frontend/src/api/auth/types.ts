@@ -25,7 +25,6 @@ export interface RegisterResponse {
         id: number;
         name: string;
         email: string;
-        // ...
     };
 }
 
@@ -34,3 +33,26 @@ export interface UserProfile {
     name: string;
     email: string;
 }
+
+export interface Project {
+    id: string;
+    name: string;
+    description?: string;
+}
+
+export interface CreateTaskDto {
+    title: string;
+    description?: string;
+    status: 'todo' | 'in_progress' | 'done';
+    projectId: number;
+    assignedUserId?: string | null;
+}
+
+    export interface UpdateProjectDto {
+    title: string;
+    description?: string;
+    status: 'todo' | 'in_progress' | 'done';
+    projectId: number;
+    assignedUserId?: string | null;
+}
+

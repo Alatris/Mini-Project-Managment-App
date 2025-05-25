@@ -1,30 +1,23 @@
 import apiClient from '../apiClient';
-import { Project, ProjectsResponse, ProjectResponse, CreateProjectRequest, UpdateProjectRequest } from './types';
+import { Project, CreateProjectDto, UpdateProjectDto } from '@/api/projects/types';
+import { AxiosResponse } from 'axios';
 
-const PROJECTS_BASE_URL = '/projects';
+export const getProjects = (): Promise<AxiosResponse<Project[]>> => {
+    return apiClient.get('/projects');
+};
 
-export const projectsApi = {
-    getAllProjects: async (): Promise<ProjectsResponse> => {
-        const response = await apiClient.get<ProjectsResponse>(PROJECTS_BASE_URL);
-        return response.data;
-    },
+export const getProject = (id: number): Promise<AxiosResponse<Project>> => {
+    return apiClient.get(`/projects/${id}`);
+};
 
-    getProjectById: async (id: number): Promise<ProjectResponse> => {
-        const response = await apiClient.get<ProjectResponse>(`${PROJECTS_BASE_URL}/${id}`);
-        return response.data;
-    },
+export const createProject = (data: CreateProjectDto): Promise<AxiosResponse<Project>> => {
+    return apiClient.post('/projects', data);
+};
 
-    createProject: async (projectData: CreateProjectRequest): Promise<ProjectResponse> => {
-        const response = await apiClient.post<ProjectResponse>(PROJECTS_BASE_URL, projectData);
-        return response.data;
-    },
+export const updateProject = (id: number, data: UpdateProjectDto): Promise<AxiosResponse<Project>> => {
+    return apiClient.put(`/projects/${id}`, data);
+};
 
-    updateProject: async (id: number, projectData: UpdateProjectRequest): Promise<ProjectResponse> => {
-        const response = await apiClient.patch<ProjectResponse>(`${PROJECTS_BASE_URL}/${id}`, projectData);
-        return response.data;
-    },
-
-    deleteProject: async (id: number): Promise<void> => {
-        await apiClient.delete<void>(`${PROJECTS_BASE_URL}/${id}`);
-    },
+export const deleteProject = (id: number): Promise<AxiosResponse<void>> => {
+    return apiClient.delete(`/projects/${id}`);
 };

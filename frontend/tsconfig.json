@@ -6,7 +6,6 @@
     "module": "ESNext",
     "skipLibCheck": true,
 
-
     /* Bundler mode */
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
@@ -25,10 +24,13 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
-    }
+    },
+
+    /* Test environment types */
+    "types": ["jest", "@testing-library/jest-dom", "node"]
   },
-},
-"include": ["src", "src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.css"] // Убедитесь, что d.ts файлы включены
-}
+  "include": ["src", "src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.css", "vitest.config.ts",
+    "jest.setup.js"
+  ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

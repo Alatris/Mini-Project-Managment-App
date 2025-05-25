@@ -1,4 +1,4 @@
-import { toastService } from '@/components/ui/toast';
+import { toastService } from '@/components/ui/toast/toast.tsx';
 
 export const useToast = () => {
     return {

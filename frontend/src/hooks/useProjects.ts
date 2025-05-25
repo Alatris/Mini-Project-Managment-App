@@ -1,11 +1,24 @@
-import { projectsApi } from '@/api/projects/projectsApi';
+import { useQuery } from '@tanstack/react-query';
+import { getProjects, getProject } from '@/api/projects/projectsApi';
 import { Project } from '@/api/projects/types';
-import { useApiQuery } from './useApiQuery';
 
-export function useProjects() {
-    const { data: projects, isLoading, error, refetch } = useApiQuery<Project[]>(
-        projectsApi.getAllProjects
-    );
+export const useProjects = () => {
+    return useQuery<Project[], Error>({
+        queryKey: ['projects'],
+        queryFn: getProjects,
+    });
+};
 
-    return { projects, isLoading, error, refetch };
-}
+
+export const useProject = (projectId?: number) => {
+    return useQuery<Project, Error>({
+        queryKey: ['project', projectId],
+        queryFn: () => {
+            if (!projectId) {
+                throw new Error('Project ID is required to fetch a project.');
+            }
+            return getProject(projectId);
+        },
+        enabled: !!projectId,
+    });
+};
